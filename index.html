@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <title>Form Activity</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        #dateOfbirth {
+            color: red;
+        }
+
+        #password {
+            color: red;
+        }
+    </style>
+<script language="JavaScript" type="text/javascript">
+        function inputPass() {
+            var pass = document.myForm.password.value;
+
+
+            var dateToday = new Date();
+            var dateOfbirth = new Date(document.myForm.bDay.value);
+            var age = dateToday.getFullYear() - dateOfbirth.getFullYear();
+
+            if (dateOfbirth.getMonth() > dateToday.getMonth() || (dateOfbirth.getMonth() == dateToday.getMonth() && dateOfbirth.getDate() > dateToday.getDate())) {
+                age--;
+            }
+
+            if (age <= 21) {
+                document.getElementById("dateOfbirth").innerHTML = "Minors are not allowed!";
+                return false;
+            }
+
+            if (pass.length < 8 || pass == "") {
+                document.getElementById("password").innerHTML = "Password must be at least 8 characters.";
+                return false; // if password is invalid or empty
+            }
+            else {
+                window.alert("Hooray! Your account has been successfully created.");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form name="myForm" onsubmit="return inputPass()">
+        <h1>Registration Form</h1>
+        <b>First Name: <input type="text" name="firstName" />
+            <br>
+            Last Name: <input type="text" name="lastName" />
+            <br>
+            Nick Name: <input type="text" name="nickName" />
+            <br>
+            Email: <input type="email" name="email" />
+            <br>
+            Password: <input type="password" name="password" />
+            <br>
+            <p id="password"></p>
+            Date of Birth: <input type="date" name="bDay" />
+            <br>
+            <p id="dateOfbirth"></p>
+            Gender: <br>
+            <input type="radio" name="Male" value="Male" /> Male
+            <input type="radio" name="Female" value="Female" /> Female
+            <input type="radio" name="Other" value="Other" /> Other
+            <br />
+            Mobile: <input type="number" name="mobileNum" />
+            <br>
+            Address: <br><textarea cols="30" rows="5" name="address"> </textarea>
+            <br>
+        </b>
+        <center><input type="submit" class="button" name="submit" value="Submit" />
+            <input type="reset" class="button" name="reset" value="Reset" />
+        </center>
+    </form>
+</body>
+</html>
